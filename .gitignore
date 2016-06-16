@@ -8,6 +8,9 @@ objs
 #ignore script
 *.sh
 
+#ignore self
+.gitignore
+
 #ignore executable programme
 fillit
 fillit.dSYM
