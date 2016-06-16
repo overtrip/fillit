@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/30 15:23:31 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/20 16:55:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/16 17:45:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_lstdel(t_list **alst)
 		{
 			if (current->data)
 				free(current->data);
-			if (current->link)
-				free(current->link);
+			if (current->next)
+				free(current->next);
 			save = current;
 			current = current->next;
 			free(save);

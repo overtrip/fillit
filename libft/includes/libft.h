@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/16 17:45:11 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ typedef struct		s_list
 {
 	void			*data;
 	struct s_list	*next;
-	struct s_list	**link;
-	int				i;
-	int				nb_malloc;
-	int				presence;
 }					t_list;
 
 typedef struct		s_read
