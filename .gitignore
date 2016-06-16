@@ -1,0 +1,13 @@
+# ignore files:
+map
+objs
+
+#eclude basic file
+!map/extern_file.txt
+
+#ignore script
+*.sh
+
+#ignore executable programme
+fillit
+fillit.dSYM
