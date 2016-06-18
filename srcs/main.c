@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/16 17:48:53 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/18 17:55:19 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			main(int argc, char **argv)
 	else
 	{
 		if ((var = open(argv[1], O_RDONLY)) < 0)
-			return (1);
+			return (print_error_msg());
 		while (get_next_line(var, &buff) > 0)
 		{
 			if (!valide_line(buff, &cmp_line, &point))
@@ -46,11 +46,13 @@ int			main(int argc, char **argv)
 				break ;
 			free(buff);
 		}
+		if (!*buff && !cmp_line && !point)
+			return (print_error_msg());
 		free(buff);
-		ft_putlist(map);
+		//ft_putlist(map);
 		delete_all(&map);
 		if (close(var) < 0)
-			return (1);
+			return (print_error_msg());
 	}
 	return (0);
 }
