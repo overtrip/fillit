@@ -6,11 +6,15 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:23:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/18 17:59:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/19 15:11:03 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+**	Check how much line between each declaration blocks
+*/
 
 static int		call_line(int *cmp_line, char *str, int *point)
 {
@@ -24,12 +28,20 @@ static int		call_line(int *cmp_line, char *str, int *point)
 	return (0);
 }
 
+/*
+**	Count how much piece point there are in block
+*/
+
 static int		nb_points(int *point, int *cmp_line)
 {
 	if (*point > 4 || (*point < 4 && *cmp_line == 4))
 		return (1);
 	return (0);
 }
+
+/*
+**	Check all errors functions and each patern point of global map
+*/
 
 int				valide_line(char *str, int *cmp_line, int *point)
 {

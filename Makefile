@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/06/15 18:01:55 by jealonso         ###   ########.fr        #
+#    Updated: 2016/06/19 17:30:43 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ LIBFT		= $(LFTPATH)/libft.a
 
 #FLAGS:
 LDFLAGS		= -L $(LFTPATH) -lft
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g -O0
 PATHLIB		= -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 
 #EXECUTALE:
@@ -42,6 +42,7 @@ NAME 		= fillit
 
 #SRCRS:
 SRCS 		= \
+			delete_all.c \
 			error.c \
 			gestion_list.c \
 			main.c \
