@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/19 15:46:57 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/20 19:18:03 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	TODO Delete after test
 */
 
-static void	print_list(t_map *map)
+void	print_list(t_map *map)
 {
 	int	i;
 
@@ -26,7 +26,26 @@ static void	print_list(t_map *map)
 		while (map->tab[++i])
 			ft_putendl(map->tab[i]);
 		map = map->next;
+		ft_putchar('\n');
 	}
+}
+
+/*
+**	TODO Delete after test
+*/
+
+static void	printr_list(t_map *map)
+{
+	int i;
+
+	if (map)
+		printr_list(map->next);
+	else
+		return ;
+	i = -1;
+	while (map->tab[++i])
+		ft_putendl(map->tab[i]);
+	ft_putchar('\n');
 }
 
 /*
@@ -35,10 +54,10 @@ static void	print_list(t_map *map)
 
 static void	init_null(t_map **map, char **buff, int *cmp_line, int *point)
 {
-	ft_bzero(map, sizeof(t_map *));
-	ft_bzero(buff, sizeof(char *));
-	ft_bzero(cmp_line, sizeof(int));
-	ft_bzero(point, sizeof(int));
+	*map = NULL;
+	*buff = NULL;
+	*cmp_line = 0;
+	*point = 0;
 }
 
 /*
@@ -69,12 +88,12 @@ int			main(int argc, char **argv)
 				get_line(&map, buff, cmp_line);
 			else
 				break ;
-			free(buff);
+			ft_strdel(&buff);
 		}
-		if (!*buff && !cmp_line && !point)
+		ft_strdel(&buff);
+		if (buff && !*buff && !cmp_line && !point)
 			return (print_error_msg());
-		free(buff);
-		print_list(map);
+		printr_list(map);
 		delete_all(&map);
 		if (close(var) < 0)
 			return (print_error_msg());

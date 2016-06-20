@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:57:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/19 18:13:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/20 19:17:53 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,13 @@ static t_map	*create_block(void)
 }
 
 /*
-**	Push back function for t_map *
+**	Push front function for t_map *
 */
 
 static void		push_elem(t_map **map, t_map *new)
 {
-	t_map	*tmp;
-
-	if (!*map)
-		*map = new;
-	else
-	{
-		tmp = *map;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
+	new->next = *map;
+	*map = new;
 }
 
 /*
@@ -61,43 +52,15 @@ void			get_line(t_map **map, char *str, int cmp_line)
 
 	i = 0;
 	new = NULL;
-	if (!str)
+	if (!(str && cmp_line))
 		return ;
-	if (!*map)
-		if (!(*map = create_block()))
-			return;
-	if (cmp_line < 5)
-	{
-		while ((*map)->tab[i])
-			++i;
-		if (i == 4)
-		{
-			if (!(new = create_block()))
-				return ;
-			push_elem(map, new);
-			i = 0;
-		}
-		(*map)->tab[i] = ft_strdup(str);
-	}
-
-/*
-**	TODO creer un maillon puis le remplir et enfin le push
-*/
-
-/*	if (!(*map) || cmp_line == 0)
+	if (!*map || cmp_line == 1)
 	{
 		if (!(new = create_block()))
 			return ;
-		if (!(*map))
-			*map = new;
+		push_elem(map, new);
 	}
-	if (cmp_line < 4)
-	{
-		while (new->tab[i])
-			++i;
-		if (i < 4)
-			new->tab[i] = ft_strdup(str);
-	}
-	if (cmp_line == 4)
-		push_elem(map, new);*/
+	while ((*map)->tab[i])
+		++i;
+	(*map)->tab[i] = ft_strdup(str);
 }
