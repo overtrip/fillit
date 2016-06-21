@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/20 19:18:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/21 16:50:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_list(t_map *map)
 **	TODO Delete after test
 */
 
-static void	printr_list(t_map *map)
+void	printr_list(t_map *map)
 {
 	int i;
 
@@ -91,9 +91,9 @@ int			main(int argc, char **argv)
 			ft_strdel(&buff);
 		}
 		ft_strdel(&buff);
-		if (buff && !*buff && !cmp_line && !point)
+		if (!map)
 			return (print_error_msg());
-		printr_list(map);
+//		printr_list(map);
 		delete_all(&map);
 		if (close(var) < 0)
 			return (print_error_msg());
