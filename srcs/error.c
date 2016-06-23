@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:23:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/21 18:22:04 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/23 17:23:24 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,72 +64,39 @@ int				valide_line(char *str, int *cmp_line, int *point)
 }
 
 /*
-**	TODO IN PROGRESS
+**	Count if they are more 27 pieces
 */
 
-
-static int		find_hash_char(t_map *map, int *i, int *j)
+int				count_piece(t_map *map)
 {
-	int		y;
-	char	*found;
-	int		pos;
+	int	nb;
 
-	y = 0;
-	while (map->tab[y])
+	nb = 0;
+	while (map)
 	{
-		if ((found = ft_strchr(map->tab[y], '#')))
-		{
-			if (j)
-				*j = y;
-			if (i)
-				*i = found - map->tab[y];
+		++nb;
+		map = map->next;
+	}
+	if (nb >= 27)
+		return (1);
+	return (0);
+}
+
+/*
+**	Lunch a loop to test all pieces blocks are connect
+*/
+
+int				error_connection(t_map *map)
+{
+	char	letter;
+
+	letter = 'A';
+	while (map)
+	{
+		if (connection(map, letter))
 			return (1);
-		}
-		j++;
+		++letter;
+		map = map->next;
 	}
 	return (0);
-}
-
-static void		flood_fill(t_map *map, int i, int j, char c)
-{
-	if (i < 0 || j < 0 || i > 3 || j > 3 || map->tab[j][i] != '#')
-		return ;
-	if (map->tab[j][i] == '#')
-		map->tab[j][i] = c;
-	flood_fill(map, i - 1, j, c);
-	flood_fill(map, i, j - 1, c);
-	flood_fill(map, i + 1, j, c);
-	flood_fill(map, i, j + 1, c);
-}
-
-int				connection(t_map *map, char c)
-{
-	int		i;
-	int		j;
-
-	if (!find_hash_char(map, &i, &j))
-		return (1);
-	flood_fill(map, i, j, c);
-	if(!find_hash_char(map, NULL, NULL))
-		return (1);
-	return (0);
-}
-
-void			backtracking(int	**tab)
-{
-	int		i;
-
-	i = 0;
-	if (resolu())
-		return ;
-	if (!verif(tab))
-		return ;
-	while (i < 10)
-	{
-		tab[0][0] = i;
-		backtracking(tab+1);
-		tab[0][0] = 0;
-		++i;
-	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/19 15:34:20 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/23 17:57:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ int					error(char *str);
 int					valide_line(char *str, int *cmp_line, int *points);
 void				get_line(t_map **map, char *str, int cmp_line);
 void				delete_all(t_map **map);
+int					error_connection(t_map *map);
+int					connection(t_map *map, char c);
+int					count_piece(t_map *map);
+int					presence_piece(t_map *map);
 
 #endif

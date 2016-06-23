@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/21 16:50:41 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/23 18:09:15 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	TODO Delete after test
 */
 
-void	print_list(t_map *map)
+void		print_list(t_map *map)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ void	print_list(t_map *map)
 **	TODO Delete after test
 */
 
-void	printr_list(t_map *map)
+void		printr_list(t_map *map)
 {
 	int i;
 
@@ -91,7 +91,7 @@ int			main(int argc, char **argv)
 			ft_strdel(&buff);
 		}
 		ft_strdel(&buff);
-		if (!map)
+		if (!map || count_piece(map) || presence_piece(map)/* || error_connection(map)*/)
 			return (print_error_msg());
 //		printr_list(map);
 		delete_all(&map);
