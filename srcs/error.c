@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:23:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/23 17:23:24 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/24 18:03:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ static int		nb_points(int *point, int *cmp_line)
 **	Check all errors functions and each patern point of global map
 */
 
-int				valide_line(char *str, int *cmp_line, int *point)
+int				valide_line(char *str, int *cmp_line, int *point, int *alert)
 {
 	int	i;
 
 	i = -1;
 	if (nb_points(point, cmp_line) || call_line(cmp_line, str, point))
-		return (print_error_msg());
+		return (++*alert);
 	while (str[++i])
 	{
 		if (str[i] != '#' && str[i] != '.' && str[i] != 0)
-			return (print_error_msg());
+			return (++*alert);
 		if (str[i] == '#')
 			++(*point);
 	}
 	if ((i > 4 || i < 4) && !(i == 0 && str[i] == 0))
-		return (print_error_msg());
+		return (++*alert);
 	else
 		return (0);
 }

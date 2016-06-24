@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/23 18:09:15 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/24 18:05:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,31 @@ void		printr_list(t_map *map)
 **	Put all strctures and variable to 0 or NULL
 */
 
-static void	init_null(t_map **map, char **buff, int *cmp_line, int *point)
+static void	init_null(t_var *var, t_map **map)
 {
 	*map = NULL;
-	*buff = NULL;
-	*cmp_line = 0;
-	*point = 0;
+	ft_bzero(var, sizeof(t_var));
+}
+
+/*
+**	Get lines and put in structur
+*/
+
+static int	aquisition(t_var *var, t_map **map)
+{
+	while (get_next_line(var->var, &var->buff) > 0)
+	{
+		if (!valide_line(var->buff, &var->cmp_line, &var->point, &var->alert))
+			get_line(&(*map), var->buff, var->cmp_line);
+		else
+			break ;
+		ft_strdel(&var->buff);
+	}
+	ft_strdel(&var->buff);
+	if (!*map || var->alert || count_piece(*map) || presence_piece(*map)
+	   )//|| error_connection(*map))
+		return (1);
+	return (0);
 }
 
 /*
@@ -66,13 +85,10 @@ static void	init_null(t_map **map, char **buff, int *cmp_line, int *point)
 
 int			main(int argc, char **argv)
 {
-	char	*buff;
-	int		cmp_line;
-	int		var;
-	int		point;
+	t_var	var;
 	t_map	*map;
 
-	init_null(&map, &buff, &cmp_line, &point);
+	init_null(&var, &map);
 	if ((argc != 2) || !(ft_strstr(argv[1], ".fillit")))
 	{
 		ft_putendl_fd("usage : fillit source_file.fillit", 2);
@@ -80,22 +96,13 @@ int			main(int argc, char **argv)
 	}
 	else
 	{
-		if ((var = open(argv[1], O_RDONLY)) < 0)
+		if ((var.var = open(argv[1], O_RDONLY)) < 0)
 			return (print_error_msg());
-		while (get_next_line(var, &buff) > 0)
-		{
-			if (!valide_line(buff, &cmp_line, &point))
-				get_line(&map, buff, cmp_line);
-			else
-				break ;
-			ft_strdel(&buff);
-		}
-		ft_strdel(&buff);
-		if (!map || count_piece(map) || presence_piece(map)/* || error_connection(map)*/)
-			return (print_error_msg());
-//		printr_list(map);
+		if (aquisition(&var, &map))
+			print_error_msg();
 		delete_all(&map);
-		if (close(var) < 0)
+//		printr_list(map);
+		if (close(var.var) < 0)
 			return (print_error_msg());
 	}
 	return (0);
