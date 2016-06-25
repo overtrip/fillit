@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/24 18:05:01 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/25 17:58:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	aquisition(t_var *var, t_map **map)
 	}
 	ft_strdel(&var->buff);
 	if (!*map || var->alert || count_piece(*map) || presence_piece(*map)
-	   )//|| error_connection(*map))
+			|| error_connection(*map))
 		return (1);
 	return (0);
 }
@@ -100,8 +100,8 @@ int			main(int argc, char **argv)
 			return (print_error_msg());
 		if (aquisition(&var, &map))
 			print_error_msg();
-		delete_all(&map);
 //		printr_list(map);
+		delete_all(&map);
 		if (close(var.var) < 0)
 			return (print_error_msg());
 	}

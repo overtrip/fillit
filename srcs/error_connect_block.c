@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/23 16:08:23 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/24 18:05:56 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/25 16:23:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				connection(t_map *map, char c)
 	if (!find_hash_char(map, &i, &j))
 		return (1);
 	flood_fill(map, i, j, c);
-	if (!find_hash_char(map, NULL, NULL))
+	if (find_hash_char(map, NULL, NULL))
 		return (1);
 	return (0);
 }
