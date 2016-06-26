@@ -6,47 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/25 17:58:07 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/26 16:34:46 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*
-**	TODO Delete after test
-*/
-
-void		print_list(t_map *map)
-{
-	int	i;
-
-	while (map)
-	{
-		i = -1;
-		while (map->tab[++i])
-			ft_putendl(map->tab[i]);
-		map = map->next;
-		ft_putchar('\n');
-	}
-}
-
-/*
-**	TODO Delete after test
-*/
-
-void		printr_list(t_map *map)
-{
-	int i;
-
-	if (map)
-		printr_list(map->next);
-	else
-		return ;
-	i = -1;
-	while (map->tab[++i])
-		ft_putendl(map->tab[i]);
-	ft_putchar('\n');
-}
 
 /*
 **	Put all strctures and variable to 0 or NULL
@@ -100,7 +64,8 @@ int			main(int argc, char **argv)
 			return (print_error_msg());
 		if (aquisition(&var, &map))
 			print_error_msg();
-//		printr_list(map);
+		if (!var.alert)
+			preparation(&map);
 		delete_all(&map);
 		if (close(var.var) < 0)
 			return (print_error_msg());

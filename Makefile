@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/06/23 16:35:33 by jealonso         ###   ########.fr        #
+#    Updated: 2016/06/26 16:33:09 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,14 @@ NAME 		= fillit
 
 #SRCRS:
 SRCS 		= \
+			algo.c \
 			delete_all.c \
 			error.c \
 			error_connect_block.c\
+			gestion_grid.c \
 			gestion_list.c \
 			main.c \
-			print_error.c \
+			print.c \
 
 #OBJ:
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))

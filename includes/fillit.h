@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/24 17:57:34 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/26 16:24:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void				delete_all(t_map **map);
 int					error_connection(t_map *map);
 int					connection(t_map *map, char c);
 int					count_piece(t_map *map);
+void				preparation(t_map **map);
 int					presence_piece(t_map *map);
+void				init_grid(char ***tab);
+void				create_grid(char **grid);
+void				delete_tab(char **tab);
+void				print_grid(char **grid);
 
 #endif
