@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 14:39:58 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/26 18:20:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/27 18:16:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,53 @@
 **	If is possible to put the piece in the grid o do it
 */
 
-static int	insert_piece(char **grid, char **piece, int position)
+typedef struct	s_pair
 {
-	int	i;
-	int	j;
+	int		x;
+	int		y;
+}				t_pair;
 
-	i = position / 10;
-	j = position % 10;
+static int	insert_piece(char **grid, char **piece, int pos_grid, int pos_piece)
+{
+	t_pair	grid_start;
+	t_pair	cursor;
+	int		error;
 
-	// TODO create a flood fill to complete grid while the piece
-	return (1);
+	ft_bzero(&cursor, sizeof(t_pair));
+	grid_start.x = pos_grid / 10;
+	grid_start.y = pos_grid % 10;
+	grid_start.x -= pos_piece / 10;
+	grid_start.y -= pos_piece % 10;
+	error = 0;
+	while (cursor.y < 4)
+	{
+		cursor.x = 0;
+		while (cursor.x < 4)
+		{
+			if (grid[grid_start.y + cursor.y][grid_start.x + cursor.x] != '.' &&
+					piece[cursor.y][cursor.x] != '.')
+				error++;
+			cursor.x++;
+		}
+		cursor.y++;
+	}
+	if (!error)
+	{
+		cursor.y = 0;
+		while (cursor.y < 4)
+		{
+			cursor.x = 0;
+			while (cursor.x < 4)
+			{
+				printf("[ %c ]\n", grid[grid_start.y + cursor.y][grid_start.x + cursor.x]);
+				grid[grid_start.y + cursor.y][grid_start.x + cursor.x] =
+					piece[cursor.y][cursor.x];
+				cursor.x++;
+			}
+			cursor.y++;
+		}
+	}
+	return (error);
 }
 
 /*
@@ -36,15 +73,26 @@ static int	match(char **grid, char **piece)
 {
 	int	i;
 	int	j;
+	int	k;
+	int	l;
 
 	i = 0;
+	k = -1;
+	while (piece[++k])
+	{
+		l = -1;
+		while (piece[k][++l] && piece[k][l] == '.')
+			;
+		if (piece[k][l] && piece[k][l] != '.')
+			break ;
+	}
 	while (grid[i])
 	{
 		j = 0;
 		while (grid[i][j])
 		{
 			if (grid[i][j] == '.')
-				if (insert_piece(grid, piece, (i * 10) + j))
+				if (insert_piece(grid, piece, (i * 10) + j, k * 10 + l))
 					return (1);
 			++j;
 		}
@@ -57,29 +105,24 @@ static int	match(char **grid, char **piece)
 **	Try all possibility in backtrack
 */
 
-void	backtrack(char **grid, t_map *map)
+void		backtrack(char **grid, t_map *map)
 {
-	while (map)
-	{
-		if (match(grid, map->tab))
-			map = map->next;
-		else
-			backtrack(grid, map->next);
-	}
-	if (!map->next)
+	if (!map)
+		return ;
+	while (match(grid, map->tab))
+		map = map->next;
+	if (map)
 	{
 		create_grid(grid);
-		backtrack(grid, map->next);
+		backtrack(grid, map);
 	}
-	else
-		return ;
 }
 
 /*
 **	Prepare and launch backtrack resolution
 */
 
-void	preparation(t_map **map)
+void		preparation(t_map **map)
 {
 	char	**grid;
 
