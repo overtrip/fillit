@@ -5,36 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/26 14:39:58 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/28 18:16:14 by jealonso         ###   ########.fr       */
+/*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
+/*   Updated: 2016/06/29 18:24:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-typedef struct	s_pair
-{
-	int		x;
-	int		y;
-}				t_pair;
-
 /*
 **	If they are no error put the piece on the grid
 */
 
-static void	put_piece(char **grid, char **piece, t_pair pos_g, t_pair pos_p)
+static void	put_piece(char **grid, char **piece, t_pair g, t_pair p)
 {
-	pos_p.y = 0;
-	while (pos_p.y < 4)
+
+	p.i = -1;
+	printf("*[%d][%d]*\n", g.i, g.j);
+	while (piece[++p.i] && p.i < 4)
 	{
-		pos_p.x = 0;
-		while (pos_p.x < 4)
+		p.j = -1;
+		while (piece[p.i][++p.j] && p.j < 4)
 		{
-			grid[pos_g.y + pos_p.y][pos_g.x + pos_p.x] =
-				piece[pos_p.y][pos_p.x];
-			pos_p.x++;
+//			printf("grid[%d][%d] = |%c|\tpiece[%d][%d] = |%c|\n", g.i + (p.i - g.i), g.j + (p.j - g.j), grid[g.i + (p.i - g.i)][g.j + (p.j - g.j)], p.i, p.j, piece[p.i][p.j]);
+			if (piece[p.i][p.j] != '.' && grid[g.i + (p.i - g.i)][g.j + (p.j - g.j)])
+			{
+				grid[g.i + (p.i - g.i)][g.j + (p.j - g.j)] = piece[p.i][p.j];
+			printf("grid[%d][%d] = |%c|\tpiece[%d][%d] = |%c|\n", g.i + (p.i - g.i), g.j + (p.j - g.j), grid[g.i + (p.i - g.i)][g.j + (p.j - g.j)],	p.i, p.j, piece[p.i][p.j]);
+			}
 		}
-		pos_p.y++;
 	}
 }
 
@@ -43,37 +41,30 @@ static void	put_piece(char **grid, char **piece, t_pair pos_g, t_pair pos_p)
 **	Test the piece if it's possible to put
 */
 
-static int	insert_piece(char **grid, char **piece, int pos_grid, int pos_piece)
+static int	insert_piece(char **grid, char **piece, t_pair pos_g, t_pair pos_p)
 {
-	t_pair	pos_g;
-	t_pair	pos_p;
+	t_pair	g;
+	t_pair	p;
 	int		error;
 
-	ft_bzero(&pos_p, sizeof(t_pair));
-	pos_g.x = pos_grid / 10;
-	pos_g.y = pos_grid % 10;
-	pos_p.x -= pos_piece / 10;
-	pos_p.y -= pos_piece % 10;
+	ft_bzero(&g, sizeof(t_pair));
+	ft_bzero(&p, sizeof(t_pair));
+	p = pos_p;
+	g = pos_g;
 	error = 0;
-	while (pos_p.y < 4 && piece[pos_p.y])
+	while (piece[p.i] && p.i < 4)
 	{
-		pos_p.x = 0;
-		while (pos_p.x < 4 && piece[pos_p.x][pos_p.y])
+		p.j = -1;
+		while (piece[p.i][++p.j] && p.j < 4)
 		{
-//			printf("[%d](pos_g.y)\t[%d](pos_g.x)\t[%d](pos_p.y)\t[%d](pos_p.x)\n", pos_g.y, pos_g.x, pos_p.y, pos_p.x);
-//			printf("** %c %c**\n", grid[pos_g.x][pos_g.y], piece[pos_p.x][pos_p.y]);
-				if ( grid[pos_g.y + pos_p.y][pos_g.x + pos_p.x] != '.' &&
-					piece[pos_p.y][pos_p.x] != '.')
+			if (grid[g.i + (p.i - g.i)][g.j + (p.j - g.j)] != '.' && piece[p.i][p.j] != '.')
 				++error;
-			++pos_p.x;
+			++p.j;
 		}
-		++pos_p.y;
+		++p.i;
 	}
 	if (!error)
-	{
-			printf("** %c %c**\n", grid[pos_g.x][pos_g.y], piece[pos_p.x][pos_p.y]);
-		put_piece(grid, piece, pos_g, pos_p);
-	}
+		put_piece(grid, piece, g, p);
 	return (error);
 }
 
@@ -83,56 +74,54 @@ static int	insert_piece(char **grid, char **piece, int pos_grid, int pos_piece)
 
 static int	match(char **grid, char **piece)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	l;
+	t_pair p;
+	t_pair g;
 
-	i = 0;
-	k = -1;
-	while (piece[++k])
+	ft_bzero(&g, sizeof(t_pair));
+	ft_bzero(&p, sizeof(t_pair));
+	g.i = -1;
+	p.i = -1;
+	while (piece[++p.i])
 	{
-		l = -1;
-		while (piece[k][++l] && piece[k][l] == '.')
+		p.j = -1;
+		while (piece[p.i][++p.j] && piece[p.i][p.j] == '.')
 			;
-		if (piece[k][l] && piece[k][l] != '.')
+		if (piece[p.i][p.j] && piece[p.i][p.j] != '.')
 			break ;
 	}
-	while (grid[i])
+	while (grid[++g.i])
 	{
-		j = 0;
-		while (grid[i][j])
+		g.j = -1;
+		while (grid[g.i][++g.j])
 		{
-			if (grid[i][j] == '.')
-				if (!insert_piece(grid, piece, (i * 10) + j, k * 10 + l))
-					 ;
-			++j;
+			if (grid[g.i][g.j] == '.')
+				if (!insert_piece(grid, piece, g, p))
+					return (1);
 		}
-		++i;
 	}
-	if (!grid[i][j])
-		return (1);
-	return (0);
+	if (!grid[g.i][g.j])
+		return (0);
+	return (1);
 }
 
 /*
 **	Try all possibility in backtrack
 */
 
-void		backtrack(char **grid, t_map *map)
+void		backtrack(char **grid, t_map *map, char **save)
 {
 	if (!map)
 		return ;
 	while (map)
 	{
 		if (!match(grid, map->tab))
-			map = map->next;
-		else
 		{
-			create_grid(grid);
-			backtrack(grid, map);
+			backtrack(grid, map->next, save);
+			grid = save;
+			map = map->next;
 		}
 	}
+	create_grid(grid);
 }
 
 /*
@@ -142,10 +131,12 @@ void		backtrack(char **grid, t_map *map)
 void		preparation(t_map **map)
 {
 	char	**grid;
+	char	**begin;
 
 	grid = NULL;
 	init_grid(&grid);
-	backtrack(grid, *map);
+	init_grid(&begin);
+	backtrack(grid, *map, begin);
 	print_grid(grid);
 	delete_tab(grid);
 }

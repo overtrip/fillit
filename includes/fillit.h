@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/26 16:24:01 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/29 16:27:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef struct		s_var
 	int				alert;
 	char			*buff;
 }					t_var;
+
+typedef struct		s_pair
+{
+	int				i;
+	int				j;
+}					t_pair;
 
 int					print_error_msg(void);
 int					valide_line(char *str, int *nb_line, int *point, int *alrt);
