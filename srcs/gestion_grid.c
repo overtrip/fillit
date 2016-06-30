@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/29 16:40:05 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/30 18:16:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,24 @@ void			create_grid(char **grid)
 	char	**new_tab;
 	int		size;
 
-	if (!(new_tab = (char **)malloc(sizeof(char *) * (count_tab(grid) + 2))))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * (count_tab(grid) + 1))))
 		return ;
-	ft_bzero(new_tab, sizeof(char **));
 	i = 0;
-	size = ft_strlen(grid[i]);
+	size = ft_strlen(grid[i]) + 1;
 	while (grid[i])
 	{
-		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (size + 2))))
+		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (size))))
 			return ;
-		new_tab[i] = ft_strdup(grid[i]);
-		new_tab[i][size + 1] = '.';
+		ft_memset(new_tab[i], '.', size);
+		new_tab[i][size] = '\0';
 		++i;
 	}
-	ft_memset(new_tab[++i], '.', size + 1);
-	new_tab[++i] = NULL;
+	if (!(new_tab[++i] = (char *)malloc(sizeof(char) * (size))))
+		return ;
+	ft_memset(new_tab[i], '.', size);
+	new_tab[i][size] = '\0';
 	while (--i > 0)
 		free(grid[i]);
+	free(grid);
 	grid = new_tab;
 }
