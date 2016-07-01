@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/29 16:27:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/01 17:00:20 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+size_t	SIZE;
 
 typedef struct		s_map
 {
@@ -52,7 +53,7 @@ int					count_piece(t_map *map);
 void				preparation(t_map **map);
 int					presence_piece(t_map *map);
 void				init_grid(char ***tab);
-void				create_grid(char **grid);
+void				create_grid(char ***grid);
 void				delete_tab(char **tab);
 void				print_grid(char **grid);
 

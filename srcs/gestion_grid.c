@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/30 18:16:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/01 16:59:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,18 @@ void			delete_tab(char **tab)
 
 void			init_grid(char ***tab)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (!((*tab) = (char **)malloc(sizeof(char *) * 5)))
+	SIZE = 4;
+	if (!((*tab) = (char **)malloc(sizeof(char *) * (SIZE + 1))))
 		return ;
-	ft_bzero((*tab), sizeof(char **));
-	while (i < 4)
+	while (i < SIZE)
 	{
-		if (!((*tab)[i] = (char *)malloc(sizeof(char) * 5)))
+		if (!((*tab)[i] = (char *)malloc(sizeof(char) * SIZE + 1)))
 			return ;
-		ft_memset((*tab)[i], '.', 4);
+		ft_memset((*tab)[i], '.', SIZE);
+		(*tab)[i][SIZE] = '\0';
 		++i;
 	}
 	(*tab)[i] = NULL;
@@ -69,30 +70,26 @@ void			init_grid(char ***tab)
 **	Create a new grid who swell of size + 1 when none pieces can't enter
 */
 
-void			create_grid(char **grid)
+void			create_grid(char ***grid)
 {
-	int		i;
+	size_t	i;
 	char	**new_tab;
-	int		size;
 
-	if (!(new_tab = (char **)malloc(sizeof(char *) * (count_tab(grid) + 1))))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * (count_tab(*grid) + 2))))
 		return ;
 	i = 0;
-	size = ft_strlen(grid[i]) + 1;
-	while (grid[i])
+	++SIZE;
+	while (i < SIZE)
 	{
-		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (size))))
+		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE + 1))))
 			return ;
-		ft_memset(new_tab[i], '.', size);
-		new_tab[i][size] = '\0';
+		ft_memset(new_tab[i], '.', SIZE);
+		new_tab[i][SIZE] = '\0';
 		++i;
 	}
-	if (!(new_tab[++i] = (char *)malloc(sizeof(char) * (size))))
-		return ;
-	ft_memset(new_tab[i], '.', size);
-	new_tab[i][size] = '\0';
+	new_tab[i] = NULL;
 	while (--i > 0)
-		free(grid[i]);
-	free(grid);
-	grid = new_tab;
+		free((*grid)[i - 1]);
+	free(*grid);
+	*grid = new_tab;
 }

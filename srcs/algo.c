@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/30 18:20:02 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/01 17:03:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,22 @@ static int	match(char **grid, char **piece)
 **	Try all possibility in backtrack
 */
 
-static void	backtrack(char **grid, t_map *map)
+static void	backtrack(char **grid, t_map *map, char **save)
 {
-	t_map	*begin;
+	t_map	*current;
 
-	begin = map;
-	if (!map)
+	current = map;
+	if (!current)
 		return ;
-	while (map)
+	while (current)
 	{
-		if (match(grid, map->tab))
+		if (match(grid, current->tab))
 		{
-			create_grid(grid);
-			printf("ici\n");
+			create_grid(&grid);
+			backtrack(grid, current, save);
+			grid = save;
+			current = current->next;
 		}
-//		backtrack(grid, map->next);
-//		map = begin;
-		map = map->next;
 	}
 }
 
@@ -123,11 +122,13 @@ static void	backtrack(char **grid, t_map *map)
 void		preparation(t_map **map)
 {
 	char	**grid;
+	char	**save;
 
 	grid = NULL;
 	init_grid(&grid);
-	backtrack(grid, *map);
-			printf("ici\n");
+	init_grid(&save);
+	backtrack(grid, *map, save);
 	print_grid(grid);
 	delete_tab(grid);
+	delete_tab(save);
 }
