@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/01 17:00:20 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/01 18:08:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void				init_grid(char ***tab);
 void				create_grid(char ***grid);
 void				delete_tab(char **tab);
 void				print_grid(char **grid);
+void				dup_grid(char ***grid, char ***save);
 
 #endif

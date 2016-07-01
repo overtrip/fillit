@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/01 16:59:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/01 18:36:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void			delete_tab(char **tab)
 	int	i;
 
 	i = 0;
+	if (!*tab)
+		return ;
 	while (tab[i])
 	{
 		free(tab[i]);
@@ -42,6 +44,29 @@ void			delete_tab(char **tab)
 	}
 	free(tab);
 }
+
+/*
+**	Duplicate a grid
+*/
+
+void			dup_grid(char ***grid, char ***save)
+{
+	char	**new;
+	size_t	i;
+
+	i = 0;
+	delete_tab(*grid);
+	if (!(new = (char **)malloc(sizeof(char *) * SIZE + 1)))
+		return ;
+	while (i < SIZE)
+	{
+		new[i] = ft_strdup(*save[i]);
+		++i;
+	}
+	new[i] = NULL;
+	*grid = new;
+}
+
 
 /*
 **	Initialise a grid of size 4 * 4
@@ -81,7 +106,7 @@ void			create_grid(char ***grid)
 	++SIZE;
 	while (i < SIZE)
 	{
-		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE + 1))))
+		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE))))
 			return ;
 		ft_memset(new_tab[i], '.', SIZE);
 		new_tab[i][SIZE] = '\0';

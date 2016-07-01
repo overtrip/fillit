@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/01 17:03:48 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/01 18:47:20 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,19 +98,18 @@ static int	match(char **grid, char **piece)
 
 static void	backtrack(char **grid, t_map *map, char **save)
 {
-	t_map	*current;
-
-	current = map;
-	if (!current)
+	if (!map)
 		return ;
-	while (current)
+	while (map)
 	{
-		if (match(grid, current->tab))
+		if (match(grid, map->tab))
+			map = map->next;
+		else
 		{
 			create_grid(&grid);
-			backtrack(grid, current, save);
-			grid = save;
-			current = current->next;
+			backtrack(grid, map, save);
+			delete_tab(grid);
+			dup_grid(&grid, &save);
 		}
 	}
 }
@@ -125,6 +124,7 @@ void		preparation(t_map **map)
 	char	**save;
 
 	grid = NULL;
+	save = NULL;
 	init_grid(&grid);
 	init_grid(&save);
 	backtrack(grid, *map, save);
