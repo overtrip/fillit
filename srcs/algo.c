@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/01 18:47:20 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/11 18:10:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	put_piece(char **grid, char **piece, const t_pair g, const t_pair p)
 		s.j = -1;
 		while (piece[s.i][++s.j] && s.j + p.j < 4)
 		{
-			if (piece[p.i + s.i][p.j + s.j] != '.' &&
+			if (grid[g.i + s.i] && piece[p.i + s.i][p.j + s.j] != '.' &&
 					grid[g.i + s.i][g.j + s.j])
 				grid[g.i + s.i][g.j + s.j] = piece[p.i + s.i][p.j + s.j];
 		}
@@ -50,7 +50,7 @@ static int	insert_piece(char **grid, char **piece, const t_pair g,
 		s.j = -1;
 		while (piece[s.i][++s.j] && s.j + p.j < 4)
 		{
-			if (piece[p.i + s.i][p.j + s.j] != '.' &&
+			if (grid[s.i + g.i] && piece[p.i + s.i][p.j + s.j] != '.' &&
 					grid[g.i + s.i][g.j + s.j] != '.')
 				++error;
 		}
@@ -87,7 +87,7 @@ static int	match(char **grid, char **piece)
 				if (!insert_piece(grid, piece, g, p))
 					return (1);
 	}
-	if (!grid[g.i][g.j])
+	if (!grid[g.i])
 		return (0);
 	return (1);
 }
@@ -100,17 +100,22 @@ static void	backtrack(char **grid, t_map *map, char **save)
 {
 	if (!map)
 		return ;
-	while (map)
+	if (map)
 	{
 		if (match(grid, map->tab))
-			map = map->next;
+		{
+			printf("dans le if\n");
+			dup_grid(&save, &grid);
+	print_grid(save);
+		backtrack(grid, map->next, save);
+		}
 		else
 		{
+			printf("dans le else\n");
 			create_grid(&grid);
-			backtrack(grid, map, save);
-			delete_tab(grid);
-			dup_grid(&grid, &save);
+	print_grid(grid);
 		}
+		dup_grid(&grid, &save);
 	}
 }
 
@@ -128,7 +133,7 @@ void		preparation(t_map **map)
 	init_grid(&grid);
 	init_grid(&save);
 	backtrack(grid, *map, save);
-	print_grid(grid);
+//	print_grid(save);
 	delete_tab(grid);
 	delete_tab(save);
 }

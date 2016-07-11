@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/01 18:36:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/11 18:08:05 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,11 @@ void			dup_grid(char ***grid, char ***save)
 		return ;
 	while (i < SIZE)
 	{
-		new[i] = ft_strdup(*save[i]);
+		new[i] = ft_strdup((*save)[i]);
 		++i;
 	}
-	new[i] = NULL;
 	*grid = new;
 }
-
 
 /*
 **	Initialise a grid of size 4 * 4
@@ -98,21 +96,28 @@ void			init_grid(char ***tab)
 void			create_grid(char ***grid)
 {
 	size_t	i;
+	int		save;
 	char	**new_tab;
 
 	if (!(new_tab = (char **)malloc(sizeof(char *) * (count_tab(*grid) + 2))))
 		return ;
 	i = 0;
 	++SIZE;
-	while (i < SIZE)
+	save = ft_strlen((*grid)[i]);
+	while ((*grid)[i])
 	{
 		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE))))
 			return ;
-		ft_memset(new_tab[i], '.', SIZE);
+		ft_memcpy(new_tab[i], (*grid)[i], save);
+		new_tab[i][save] = '.';
 		new_tab[i][SIZE] = '\0';
 		++i;
 	}
-	new_tab[i] = NULL;
+	if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE))))
+		return ;
+	ft_memset(new_tab[i], '.', SIZE);
+	new_tab[i][SIZE] = '\0';
+	new_tab[++i] = NULL;
 	while (--i > 0)
 		free((*grid)[i - 1]);
 	free(*grid);
