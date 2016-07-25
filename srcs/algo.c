@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/11 18:27:47 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/25 17:56:12 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	If they are no error put the piece on the grid
 */
 
-static void	put_piece(char **grid, char **piece, const t_pair g, const t_pair p)
+void	put_piece(char **grid, char **piece, const t_pair g, const t_pair p)
 {
 	t_pair	s;
 
@@ -37,7 +37,7 @@ static void	put_piece(char **grid, char **piece, const t_pair g, const t_pair p)
 **	Test the piece if it's possible to put
 */
 
-static int	insert_piece(char **grid, char **piece, const t_pair g,
+int	insert_piece(char **grid, char **piece, const t_pair g,
 				const t_pair p)
 {
 	t_pair	s;
@@ -64,7 +64,7 @@ static int	insert_piece(char **grid, char **piece, const t_pair g,
 **	Find a '.' on the grid and first block of piece
 */
 
-static int	match(char **grid, char **piece)
+int	match(char **grid, char **piece)
 {
 	t_pair p;
 	t_pair g;
@@ -96,27 +96,18 @@ static int	match(char **grid, char **piece)
 **	Try all possibility in backtrack
 */
 
-static void	backtrack(char **grid, t_map *map, char **save)
+void	backtrack(char **grid, t_map *map, char **save)
 {
 	if (!map)
 		return ;
-	if (map)
+	while (map)
 	{
-		if (match(grid, map->tab))
-		{
-			printf("dans le if\n");
-			dup_grid(&save, &grid);
-	print_grid(save);
+		if (!match(grid, map->tab))
+			break ;
 		backtrack(grid, map->next, save);
-		}
-		else
-		{
-			printf("dans le else\n");
-			create_grid(&grid);
-	print_grid(grid);
-		}
-		dup_grid(&grid, &save);
 	}
+	create_grid(&grid);
+	backtrack(grid, map, save);
 }
 
 /*
@@ -132,8 +123,9 @@ void		preparation(t_map **map)
 	save = NULL;
 	init_grid(&grid);
 	init_grid(&save);
+	(void)map;
 	backtrack(grid, *map, save);
-//	print_grid(save);
+	print_grid(save);
 	delete_tab(grid);
 	delete_tab(save);
 }

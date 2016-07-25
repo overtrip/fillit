@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/19 15:28:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/19 17:26:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/25 17:28:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,25 @@ static void	del_map(t_map **map)
 		}
 		*map = NULL;
 	}
+}
+
+/*
+**	Free all elemets and tab
+*/
+
+void		delete_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	if (!*tab)
+		return ;
+	while (i < SIZE)
+	{
+		free(tab[i]);
+		++i;
+	}
+	free(tab);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/11 18:27:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/07/25 16:57:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,6 @@ static int		count_tab(char **tab)
 }
 
 /*
-**	Free all elemets and tab
-*/
-
-void			delete_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!*tab)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		++i;
-	}
-	free(tab);
-}
-
-/*
 **	Duplicate a grid
 */
 
@@ -58,6 +39,7 @@ void			dup_grid(char ***grid, char ***save)
 	delete_tab(*grid);
 	if (!(new = (char **)malloc(sizeof(char *) * SIZE + 1)))
 		return ;
+	i = 0;
 	while (i < SIZE)
 	{
 		new[i] = ft_strdup((*save)[i]);
