@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/25 17:56:12 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/12 17:58:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	put_piece(char **grid, char **piece, const t_pair g, const t_pair p)
 **	Test the piece if it's possible to put
 */
 
-int	insert_piece(char **grid, char **piece, const t_pair g,
+int		insert_piece(char **grid, char **piece, const t_pair g,
 				const t_pair p)
 {
 	t_pair	s;
@@ -64,7 +64,7 @@ int	insert_piece(char **grid, char **piece, const t_pair g,
 **	Find a '.' on the grid and first block of piece
 */
 
-int	match(char **grid, char **piece)
+int		match(char **grid, char **piece)
 {
 	t_pair p;
 	t_pair g;
@@ -96,36 +96,37 @@ int	match(char **grid, char **piece)
 **	Try all possibility in backtrack
 */
 
-void	backtrack(char **grid, t_map *map, char **save)
+void	backtrack(char **grid, t_map *map)
 {
 	if (!map)
 		return ;
 	while (map)
 	{
-		if (!match(grid, map->tab))
-			break ;
-		backtrack(grid, map->next, save);
+		if (match(grid, map->tab))
+		{
+			ft_putendl("ici");
+			print_grid(grid);
+			map = map->next;
+		}
+		else
+		{
+			create_grid(&grid);
+			backtrack(grid, map);
+		}
 	}
-	create_grid(&grid);
-	backtrack(grid, map, save);
 }
 
 /*
 **	Prepare and launch backtrack resolution
 */
 
-void		preparation(t_map **map)
+void	preparation(t_map **map)
 {
 	char	**grid;
-	char	**save;
 
 	grid = NULL;
-	save = NULL;
 	init_grid(&grid);
-	init_grid(&save);
-	(void)map;
-	backtrack(grid, *map, save);
-	print_grid(save);
+	backtrack(grid, *map);
+	ft_putendl("fini");
 	delete_tab(grid);
-	delete_tab(save);
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/25 16:57:41 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/12 17:43:00 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ void			create_grid(char ***grid)
 	save = ft_strlen((*grid)[i]);
 	while ((*grid)[i])
 	{
-		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE))))
+		if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE) + 1)))
 			return ;
 		ft_memcpy(new_tab[i], (*grid)[i], save);
 		new_tab[i][save] = '.';
 		new_tab[i][SIZE] = '\0';
 		++i;
 	}
-	if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE))))
+	if (!(new_tab[i] = (char *)malloc(sizeof(char) * (SIZE) + 1)))
 		return ;
 	ft_memset(new_tab[i], '.', SIZE);
 	new_tab[i][SIZE] = '\0';
