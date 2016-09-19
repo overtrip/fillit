@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/12 17:58:34 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/19 17:11:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,10 @@ void	backtrack(char **grid, t_map *map)
 	{
 		if (match(grid, map->tab))
 		{
-			ft_putendl("ici");
-			print_grid(grid);
 			map = map->next;
 		}
 		else
-		{
 			create_grid(&grid);
-			backtrack(grid, map);
-		}
 	}
 }
 
@@ -125,8 +120,19 @@ void	preparation(t_map **map)
 	char	**grid;
 
 	grid = NULL;
+	(void) map;
 	init_grid(&grid);
-	backtrack(grid, *map);
-	ft_putendl("fini");
+	//backtrack(grid, *map);
+//	while (map)
+//	{
+//		if (match(grid, (*map)->tab))
+//		{
+//			*map = (*map)->next;
+//		}
+//		else
+//			create_grid(&grid);
+//	}
+			create_grid(&grid);
+//	print_grid(grid);
 	delete_tab(grid);
 }
