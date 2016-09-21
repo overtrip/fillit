@@ -6,11 +6,22 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/19 15:28:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/19 17:45:56 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:30:09 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+**	Use only in gestion_grid to win a few lines
+*/
+
+void		delete_old_tab(char ***grid, size_t i)
+{
+	while (i > 0)
+		free((*grid)[i-- - 1]);
+	free(*grid);
+}
 
 /*
 **	Delete all elements of map
