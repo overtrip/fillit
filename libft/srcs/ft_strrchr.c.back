@@ -1,49 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 17:33:48 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:42:18 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include <string.h>
+#include "libft.h"
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
+	char	*result;
 
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	result = NULL;
+	while (*s)
+	{
+		if (*s == (char)c)
+			result = (char *)s;
+		s++;
+	}
+	if ((char)c == '\0')
+		result = (char *)s;
+	return (result);
 }

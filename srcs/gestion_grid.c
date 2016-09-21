@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 13:36:50 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/21 17:42:24 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@
 **	Count size of a table
 */
 
+/*
 static int		count_tab(char **tab)
 {
 	int	i;
 
+	return (g_size);
 	i = 0;
 	while (tab[i])
 		++i;
 	return (i);
 }
+*/
 
 /*
 **	Duplicate a grid
@@ -36,11 +39,11 @@ void			dup_grid(char ***grid, char ***save)
 	size_t	i;
 
 	i = 0;
-	delete_tab(*grid);
-	if (!(new = (char **)malloc(sizeof(char *) * SIZE + 1)))
+	delete_tab(grid);
+	if (!(new = (char **)malloc(sizeof(char *) * g_size + 1)))
 		return ;
 	i = 0;
-	while (i < SIZE)
+	while (i < g_size)
 	{
 		new[i] = ft_strdup((*save)[i]);
 		++i;
@@ -58,19 +61,18 @@ void			init_grid(char ***tab)
 	size_t	end;
 
 	i = 0;
-	SIZE = 4;
-	end = SIZE + 1;
-	if (!((*tab) = (char **)malloc(sizeof(char *) * end)))
+	g_size = 4;
+	end = g_size + 1;
+	if (!((*tab) = (char **)malloc(sizeof(char *) * g_size)))
 		return ;
-	while (i < SIZE)
+	while (i < g_size)
 	{
 		if (!((*tab)[i] = (char *)malloc(sizeof(char) * end)))
 			return ;
-		ft_memset((*tab)[i], '.', SIZE);
-		(*tab)[i][SIZE] = '\0';
+		ft_memset((*tab)[i], '.', g_size);
+		(*tab)[i][g_size] = '\0';
 		++i;
 	}
-	(*tab)[i] = NULL;
 }
 
 /*
@@ -83,25 +85,23 @@ void			create_grid(char ***grid)
 	size_t	end;
 	char	**new_tab;
 
-	if (!(new_tab = (char **)malloc(sizeof(char *) * (count_tab(*grid) + 2))))
+	if (!(new_tab = (char **)malloc(sizeof(char *) * (g_size + 1))))
 		return ;
 	i = 0;
-	++SIZE;
-	end = SIZE + 1;
-	while (i < SIZE - 1)
+	++g_size;
+	end = g_size + 1;
+	while (i < g_size)
 	{
 		if (!(new_tab[i] = (char *)malloc(sizeof(char) * end)))
 			return ;
-		ft_memcpy(new_tab[i], (*grid)[i], SIZE - 1);
-		new_tab[i][SIZE - 1] = '.';
-		new_tab[i][SIZE] = '\0';
+		if (i + 1 != g_size)
+			ft_memcpy(new_tab[i], (*grid)[i], g_size - 1);
+		else
+			ft_memset(new_tab[i], '.', g_size);
+		new_tab[i][g_size - 1] = '.';
+		new_tab[i][g_size] = '\0';
 		++i;
 	}
-	if (!(new_tab[i] = (char *)malloc(sizeof(char) * end)))
-		return ;
-	ft_memset(new_tab[i], '.', SIZE);
-	new_tab[i][SIZE] = '\0';
-	new_tab[SIZE] = NULL;
-	delete_old_tab(grid, i);
+	delete_old_tab(grid);
 	*grid = new_tab;
 }

@@ -1,49 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/30 15:23:31 by jealonso          #+#    #+#             */
+/*   Updated: 2016/06/24 17:00:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
+#include <stdlib.h>
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+void	ft_lstdel(t_list **alst)
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
+	t_list	*current;
+	t_list	*save;
 
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	if (alst)
+	{
+		current = *alst;
+		while (current)
+		{
+			save = current;
+			current = current->next;
+			free(save->data);
+			free(save);
+		}
+		*alst = NULL;
+	}
 }

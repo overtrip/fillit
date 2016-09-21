@@ -1,49 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 11:37:24 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:45:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
-
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	if (s1 && s2)
+		return (ft_strncmp(s1, s2, n) == 0);
+	else
+		return (0);
 }

@@ -1,49 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2014/11/06 17:57:22 by jealonso          #+#    #+#             */
+/*   Updated: 2015/12/16 17:30:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+char	*ft_strndup(const char *s1, int count)
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
+	char	*s2;
+	int		save;
 
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	s2 = NULL;
+	save = count;
+	if (save <= 0)
+		return (NULL);
+	if ((s2 = (char *)malloc(sizeof(char) * ++count)))
+		while (s1 && *s1 && --count)
+		{
+			*s2 = *s1;
+			++s2;
+			++s1;
+		}
+	*s2 = '\0';
+	return (s2 - save);
 }

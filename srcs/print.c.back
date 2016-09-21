@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/21 17:06:24 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_grid(char **grid)
 	size_t	i;
 
 	i = 0;
-	while (i < g_size)
+	while (i < SIZE)
 		ft_putendl(grid[i++]);
 }
 

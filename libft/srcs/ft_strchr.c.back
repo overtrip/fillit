@@ -1,49 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 17:04:35 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:41:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include <string.h>
+#include "libft.h"
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+char	*ft_strchr(const char *s, int c)
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
+	char	to_find;
+	int		i;
 
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
+	to_find = (char)c;
 	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	while (s[i])
+	{
+		if (s[i] == to_find)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (to_find == '\0')
+		return ((char *)&s[i]);
+	else
+		return (NULL);
 }

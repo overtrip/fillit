@@ -1,49 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/21 18:11:57 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:54:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include <string.h>
+#include "libft.h"
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
+	const unsigned char	*sptr;
 
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	sptr = (const unsigned char *)s;
+	while (n--)
+	{
+		if (*sptr == (unsigned char)c)
+			return ((void *)sptr);
+		sptr++;
+	}
+	return (NULL);
 }

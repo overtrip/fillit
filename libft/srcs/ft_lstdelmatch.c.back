@@ -1,49 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_lstdelmatch.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/15 16:07:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:52 by jealonso         ###   ########.fr       */
+/*   Created: 2014/02/15 19:15:09 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:55:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include <stdlib.h>
+#include "libft.h"
 
-/*
-**	Global print error message
-*/
-
-int		print_error_msg(void)
+t_list	*ft_lstdelmatch(t_list **alst, void *data, int (*cmp)(void*, void*))
 {
-	ft_putendl_fd("error", 2);
-	return (1);
-}
+	t_list	*ret;
 
-/*
-**	Print final grid resolution
-*/
-
-void	print_grid(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < g_size)
-		ft_putendl(grid[i++]);
-}
-
-/*
-**	Print piece for debug purpose
-*/
-
-void	print_piece(char **grid)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-		ft_putendl(grid[i++]);
+	if (!*alst)
+		return (NULL);
+	ret = ft_lstdelmatch(&((*alst)->next), data, cmp);
+	if (cmp((*alst)->content, data))
+	{
+		free((*alst)->content);
+		free(*alst);
+		*alst = ret;
+		return (ret);
+	}
+	else
+	{
+		(*alst)->next = ret;
+		return (*alst);
+	}
 }

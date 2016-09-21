@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 13:29:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/21 17:43:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@
 
 # include <stdio.h>
 # include <fcntl.h>
-size_t	SIZE;
+
+size_t	g_size;
+
+# define GRIDI(g, s, p) ((size_t)(g.i + s.i - p.i) < g_size)
+# define GRIDJ(g, s, p) ((size_t)(g.j + s.j - p.j) < g_size)
+# define INGRID(g, s, p) (GRIDI(g, s, p) && GRIDJ(g, s, p))
 
 typedef struct		s_map
 {
@@ -54,9 +59,10 @@ void				preparation(t_map **map);
 int					presence_piece(t_map *map);
 void				init_grid(char ***tab);
 void				create_grid(char ***grid);
-void				delete_tab(char **tab);
+void				delete_tab(char ***tab);
 void				print_grid(char **grid);
+void				print_piece(char **grid);
 void				dup_grid(char ***grid, char ***save);
-void				delete_old_tab(char ***grid, size_t i);
+void				delete_old_tab(char ***grid);
 
 #endif

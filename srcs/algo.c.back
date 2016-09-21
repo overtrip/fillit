@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/21 17:42:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	backtrack(char ***grid, t_map *map)
 	print_piece(map->tab);
 	ft_putendl("[+++ END +++]");
 	ft_putchar('\n');
-*/	ft_putendl("[--- g_size ---]");
+*/	ft_putendl("[--- GRID ---]");
 	print_grid(*grid);
 	ft_putendl("[--- END ---]");
 	ft_putchar('\n');
