@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:57:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	preparation(t_map **map)
 	char	**grid;
 
 	grid = NULL;
+	g_size = size_min_square(*map);
 	init_grid(&grid);
 	backtrack(&grid, *map);
 	print_grid(grid);

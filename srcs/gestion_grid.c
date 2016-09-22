@@ -6,28 +6,31 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:42:24 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:56:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	Count size of a table
+**	Search theoretical minimal size of the grid square
 */
 
-/*
-static int		count_tab(char **tab)
+int		size_min_square(t_map *map)
 {
 	int	i;
+	int	square_min;
 
-	return (g_size);
 	i = 0;
-	while (tab[i])
-		++i;
-	return (i);
+	square_min = 2;
+	while(map && ++i)
+		map = map->next;
+	i *= 4;
+	while ((square_min * square_min)  < i)
+		++square_min;
+	return (square_min);
 }
-*/
+
 
 /*
 **	Duplicate a grid
@@ -61,7 +64,6 @@ void			init_grid(char ***tab)
 	size_t	end;
 
 	i = 0;
-	g_size = 4;
 	end = g_size + 1;
 	if (!((*tab) = (char **)malloc(sizeof(char *) * g_size)))
 		return ;

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:43:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:56:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void				print_grid(char **grid);
 void				print_piece(char **grid);
 void				dup_grid(char ***grid, char ***save);
 void				delete_old_tab(char ***grid);
+int					size_min_square(t_map *map);
 
 #endif
