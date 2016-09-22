@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/22 14:57:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/22 16:50:55 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		match(char **grid, char **piece)
 /*
 **	Try all possibility in backtrack
 */
-
+/*
 void	backtrack(char ***grid, t_map *map)
 {
 	if (!map)
@@ -107,18 +107,25 @@ void	backtrack(char ***grid, t_map *map)
 	{
 		if (match(*grid, map->tab))
 		{
-/*	ft_putendl("[+++ PIECE +++]");
-	print_piece(map->tab);
-	ft_putendl("[+++ END +++]");
-	ft_putchar('\n');
-*/	ft_putendl("[--- g_size ---]");
+	ft_putendl("[--- g_size ---]");
 	print_grid(*grid);
 	ft_putendl("[--- END ---]");
 	ft_putchar('\n');
 			map = map->next;
 		}
 		else
-			create_grid(grid);
+			backtrack(grid, map);
+	}
+}*/
+
+int		backtrack(char **grid, t_map *map)
+{
+	if (!map)
+		return (0);
+	else
+	{
+		if (match(grid, map->tab))
+			return (backtrack(grid, map->next));
 	}
 }
 
@@ -133,7 +140,7 @@ void	preparation(t_map **map)
 	grid = NULL;
 	g_size = size_min_square(*map);
 	init_grid(&grid);
-	backtrack(&grid, *map);
+	backtrack(grid, *map);
 	print_grid(grid);
 	delete_tab(&grid);
 }
