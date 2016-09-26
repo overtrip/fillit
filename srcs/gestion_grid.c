@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/22 14:56:07 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/26 17:42:51 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,20 @@ void			create_grid(char ***grid)
 {
 	size_t	i;
 	size_t	end;
-	char	**new_tab;
 
-	if (!(new_tab = (char **)malloc(sizeof(char *) * (g_size + 1))))
+	delete_old_tab(grid);
+	++g_size;
+	if (!((*grid) = (char **)malloc(sizeof(char *) * (g_size))))
 		return ;
 	i = 0;
-	++g_size;
 	end = g_size + 1;
 	while (i < g_size)
 	{
-		if (!(new_tab[i] = (char *)malloc(sizeof(char) * end)))
+		if (!((*grid)[i] = (char *)malloc(sizeof(char) * end)))
 			return ;
-		if (i + 1 != g_size)
-			ft_memcpy(new_tab[i], (*grid)[i], g_size - 1);
-		else
-			ft_memset(new_tab[i], '.', g_size);
-		new_tab[i][g_size - 1] = '.';
-		new_tab[i][g_size] = '\0';
+		ft_memset((*grid)[i], '.', g_size);
+		(*grid)[i][g_size] = '\0';
 		++i;
 	}
-	delete_old_tab(grid);
-	*grid = new_tab;
+	*grid = (*grid);
 }

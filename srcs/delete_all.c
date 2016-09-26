@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/19 15:28:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/21 17:45:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/26 17:43:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		delete_old_tab(char ***grid)
 	size_t	i;
 
 	i = 0;
-	while (i < g_size - 1)
+	while (i < g_size)
 		free((*grid)[i++]);
 	free(*grid);
 }
@@ -65,10 +65,7 @@ void		delete_tab(char ***tab)
 	if (!**tab)
 		return ;
 	while (i < g_size)
-	{
-		free((*tab)[i]);
-		++i;
-	}
+		free((*tab)[i++]);
 	free(*tab);
 }
 
