@@ -6,38 +6,17 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:25:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/26 17:50:20 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:50:25 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	Erase the try to placed piece
-*/
-
-void	erase_try(char ***grid, char **piece, const t_pair g, const t_pair p)
-{
-	t_pair	s;
-
-	s.i = p.i - 1;
-	s.j = p.j - 1;
-	while (++s.i < 4)
-	{
-		while (++s.j < 4)
-		{
-			if (INGRID(g, s, p) && piece[s.i][s.j] != '.')
-				(*grid)[g.i + s.i - p.i][g.j + s.j - p.j] = '.';
-		}
-		s.j = -1;
-	}
-}
-
-/*
 **	If they are no error put the piece on the grid
 */
 
-void	put_piece(char ***grid, char **piece, const t_pair g, const t_pair p)
+static void	put_slab(char ***grid, char **piece, const t_pair g, const t_pair p)
 {
 	t_pair	s;
 
@@ -58,7 +37,7 @@ void	put_piece(char ***grid, char **piece, const t_pair g, const t_pair p)
 **	Test the piece if it's possible to put
 */
 
-int		insert_piece(char ***grid, char **piece, const t_pair g,
+static int	insert_piece(char ***grid, char **piece, const t_pair g,
 				const t_pair p)
 {
 	t_pair	s;
@@ -81,7 +60,7 @@ int		insert_piece(char ***grid, char **piece, const t_pair g,
 		s.j = -1;
 	}
 	if (!error)
-		put_piece(grid, piece, g, p);
+		put_slab(grid, piece, g, p);
 	return (error);
 }
 
@@ -89,7 +68,7 @@ int		insert_piece(char ***grid, char **piece, const t_pair g,
 **	Find the beginning of the piece
 */
 
-void	find_beginning_piece(char **piece, t_pair *p)
+static void	find_beginning_piece(char **piece, t_pair *p)
 {
 	while (++(*p).i < 4 && ((*p).j = -1))
 	{
@@ -104,7 +83,7 @@ void	find_beginning_piece(char **piece, t_pair *p)
 **	Try all possibility in backtrack
 */
 
-int		backtrack(char **grid, t_map *map)
+static int	backtrack(char **grid, t_map *map)
 {
 	t_pair p;
 	t_pair g;
@@ -135,7 +114,7 @@ int		backtrack(char **grid, t_map *map)
 **	Prepare and launch backtrack resolution
 */
 
-void	preparation(t_map **map)
+void		preparation(t_map **map)
 {
 	char	**grid;
 

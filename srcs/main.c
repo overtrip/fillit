@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/07/01 18:13:48 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:39:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			main(int argc, char **argv)
 		if ((var.var = open(argv[1], O_RDONLY)) < 0)
 			return (print_error_msg());
 		if (aquisition(&var, &map))
-			print_error_msg();
+			return (print_error_msg());
 		if (!var.alert)
 			preparation(&map);
 		delete_all(&map);

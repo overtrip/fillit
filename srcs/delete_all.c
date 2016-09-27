@@ -6,11 +6,33 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/19 15:28:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/26 17:43:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:50:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+**	Erase the try to placed piece
+*/
+
+void		erase_try(char ***grid, char **piece,
+		const t_pair g, const t_pair p)
+{
+	t_pair	s;
+
+	s.i = p.i - 1;
+	s.j = p.j - 1;
+	while (++s.i < 4)
+	{
+		while (++s.j < 4)
+		{
+			if (INGRID(g, s, p) && piece[s.i][s.j] != '.')
+				(*grid)[g.i + s.i - p.i][g.j + s.j - p.j] = '.';
+		}
+		s.j = -1;
+	}
+}
 
 /*
 **	Use only in gestion_grid to win a few lines

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/26 17:42:51 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:44:51 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,42 +23,19 @@ int		size_min_square(t_map *map)
 
 	i = 0;
 	square_min = 2;
-	while(map && ++i)
+	while (map && ++i)
 		map = map->next;
 	i *= 4;
-	while ((square_min * square_min)  < i)
+	while ((square_min * square_min) < i)
 		++square_min;
 	return (square_min);
-}
-
-
-/*
-**	Duplicate a grid
-*/
-
-void			dup_grid(char ***grid, char ***save)
-{
-	char	**new;
-	size_t	i;
-
-	i = 0;
-	delete_tab(grid);
-	if (!(new = (char **)malloc(sizeof(char *) * g_size + 1)))
-		return ;
-	i = 0;
-	while (i < g_size)
-	{
-		new[i] = ft_strdup((*save)[i]);
-		++i;
-	}
-	*grid = new;
 }
 
 /*
 **	Initialise a grid of size 4 * 4
 */
 
-void			init_grid(char ***tab)
+void	init_grid(char ***tab)
 {
 	size_t	i;
 	size_t	end;
@@ -81,7 +58,7 @@ void			init_grid(char ***tab)
 **	Create a new grid who swell of size + 1 when none pieces can't enter
 */
 
-void			create_grid(char ***grid)
+void	create_grid(char ***grid)
 {
 	size_t	i;
 	size_t	end;
