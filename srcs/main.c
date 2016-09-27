@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/27 13:39:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:57:55 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static void	init_null(t_var *var, t_map **map)
 
 static int	aquisition(t_var *var, t_map **map)
 {
+	t_map	*tmp;
+
+	tmp = NULL;
 	while (get_next_line(var->var, &var->buff) > 0)
 	{
 		if (!valide_line(var->buff, &var->cmp_line, &var->point, &var->alert))
@@ -37,6 +40,7 @@ static int	aquisition(t_var *var, t_map **map)
 		ft_strdel(&var->buff);
 	}
 	ft_strdel(&var->buff);
+	*map = pt_map(*map);
 	if (!*map || var->alert || count_piece(*map) || presence_piece(*map)
 			|| error_connection(*map))
 		return (1);

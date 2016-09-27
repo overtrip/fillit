@@ -6,11 +6,31 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:57:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/24 16:06:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:59:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+**	Use to reverse map to conforme the subjetc
+*/
+
+t_map			*pt_map(t_map *map)
+{
+	t_map	*map_next;
+	t_map	*top_of_stack;
+
+	top_of_stack = NULL;
+	while (map)
+	{
+		map_next = map->next;
+		map->next = top_of_stack;
+		top_of_stack = map;
+		map = map_next;
+	}
+	return (top_of_stack);
+}
 
 /*
 **	Create a new link with 4 to include blocks
