@@ -6,14 +6,14 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/19 15:28:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/27 13:50:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:58:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
-**	Erase the try to placed piece
+**	Erase the try to placed piece used in algo.c
 */
 
 void		erase_try(char ***grid, char **piece,
@@ -35,7 +35,7 @@ void		erase_try(char ***grid, char **piece,
 }
 
 /*
-**	Use only in gestion_grid to win a few lines
+**	Use only in gestion_grid.c to win a few lines
 */
 
 void		delete_old_tab(char ***grid)

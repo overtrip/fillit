@@ -6,19 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:28:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/27 13:50:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/27 13:58:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 # include "libft.h"
-
-/*
-**	TODO Delete this library because use for printf function
-*/
-
-# include <stdio.h>
 # include <fcntl.h>
 
 size_t	g_size;
