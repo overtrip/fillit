@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 15:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/27 13:44:51 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/09/28 16:14:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	create_grid(char ***grid)
 	end = g_size + 1;
 	while (i < g_size)
 	{
-		if (!((*grid)[i] = (char *)malloc(sizeof(char) * end)))
+		if (!((*grid)[i] = (char *)malloc(sizeof(char) * g_size)))
 			return ;
 		ft_memset((*grid)[i], '.', g_size);
 		(*grid)[i][g_size] = '\0';
