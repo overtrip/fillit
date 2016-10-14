@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/23 16:08:23 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/26 18:18:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/13 17:15:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int				presence_piece(t_map *map)
 		presence = 0;
 		while (map->tab[i])
 		{
-			if (strchr(map->tab[i], '#'))
+			if (ft_strchr(map->tab[i], '#'))
 				++presence;
 			++i;
 		}

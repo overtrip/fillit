@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/15 16:24:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/27 17:57:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:44:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	init_null(t_var *var, t_map **map)
 /*
 **	Get lines and put in structur
 */
-
 static int	aquisition(t_var *var, t_map **map)
 {
 	t_map	*tmp;
@@ -42,7 +41,7 @@ static int	aquisition(t_var *var, t_map **map)
 	ft_strdel(&var->buff);
 	*map = pt_map(*map);
 	if (!*map || var->alert || count_piece(*map) || presence_piece(*map)
-			|| error_connection(*map))
+			|| error_connection(*map) || !var->cmp_line)
 		return (1);
 	return (0);
 }
@@ -57,10 +56,10 @@ int			main(int argc, char **argv)
 	t_map	*map;
 
 	init_null(&var, &map);
-	if ((argc != 2) || !(ft_strstr(argv[1], ".fillit")))
+	if ((argc != 2))
 	{
-		ft_putendl_fd("usage : fillit source_file.fillit", 2);
-		exit(2);
+		ft_putendl_fd("error", 1);
+		exit(0);
 	}
 	else
 	{
